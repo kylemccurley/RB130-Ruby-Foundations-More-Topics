@@ -40,12 +40,14 @@ end
 =begin
   Trace the Code Execution:
   ---------------------------------------------------
-  1. Execution starts with method invocation on line 10.
-  2. Method local variable |number| is assigned the integer 5 on line 2.
-  3. Conditional is evaluated as to whether the method has received a block. 
-  4. Since a block was given to the increment(number) method, execution moves to line 4 where the yield keyword passes in the argument of number + 1. 
-  5. Execution moves to line 10, where the block parameter num is assigned the value of number + 1, which is 6. So the block parameter num is assigned the value 6.
-  6. Execution moves to line 11, where the block parameter num is passed into the Kernel#puts method. This prints the value of the block parameter num to the console.
-  7. After the block has been executed, the program moves to line 6, since the if statement has already been executed. This returns the local variable number incremented up by 1. It is returned because it is at the very end of the increment(number) method.
-  8. On line 6, the end keyword is defined, ending the increment(number) method.
+  1. Execution starts with method invocation on line 36.
+  2. Method local variable number is assigned the integer 5 on line 28; block is made implicitly available.
+  3. Conditional is evaluated as to whether the method has received a block on line 29. 
+  4. Since a block was given to the increment(number) method, execution moves to line 4 where a block is yielded with number + 1 as an argument. 
+  5. Execution moves to line 10, where the block argument num is assigned the value of number + 1, which is 6. So the block argument num is assigned the value 6. 
+  6. Execution moves to line 11, where the block argument num is passed into the Kernel#puts method. This prints the value of the block parameter num to the console.
+  7. After the block has been executed, the program moves to line 6. This returns the local variable number incremented up by 1. It is returned because it is at the very end of the increment(number) method.
+  8. On line 6, the end keyword is declared, ending the increment(number) method.
+
+Sequence: 36, 28, 29, 30, 36, 37, 38, 30, 31, 32, 36, end-of-program
 =end
