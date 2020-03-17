@@ -1,3 +1,6 @@
+# Modify bubble_sort!() so it takes an optional block that determines which of two consecutive elements 
+# will appear first in the results.
+
 def bubble_sort!(array)
   loop do
     swapped = false
