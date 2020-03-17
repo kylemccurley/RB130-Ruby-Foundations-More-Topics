@@ -2,6 +2,14 @@ class Device
   def initialize
     @recordings = []
   end
+  
+  def listen
+    @recordings << yield if block_given?
+  end
+  
+  def play
+    puts @recordings.last
+  end
 
   def record(recording)
     @recordings << recording
