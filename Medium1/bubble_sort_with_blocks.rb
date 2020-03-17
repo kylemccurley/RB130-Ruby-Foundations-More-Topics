@@ -17,10 +17,6 @@ def bubble_sort!(array)
   nil
 end
 
-=begin
-Your task in this assignment is to modify #bubble_sort! so it takes an optional block that determines which of two consecutive elements will appear first in the results.
-=end
-
 array = [5, 3]
 bubble_sort!(array)
 p array == [3, 5]
