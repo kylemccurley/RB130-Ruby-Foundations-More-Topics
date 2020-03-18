@@ -2,11 +2,7 @@
 Algorithm For the Slices Method:
   Given an integer: n
   SET outcome = []
-  LOOP @slices.each_with_index do |el, idx|
-    SET sub_array = []
-    LOOP n times do |offset|
-      APPEND @series[idx + offset] to sub_array
-    END
+  LOOP @slices.each_cons do |sub_array|
     APPEND sub_array to outcome
   END
   RETURN outcome
@@ -16,12 +12,15 @@ Algorithm For the Slices Method:
 
 class Series
   def initialize(str)
-    @string = str  
+    @series_arr = str.chars
   end
   
   def slices(num_slices)
     outcome = []
-    @string.chars.map(&:to_i).each_cons(num_slices) { |sub_arr| outcome << sub_arr }
+
+    raise ArgumentError, 'Slice number is too large' if num_slices > @string.size
+    @series_arr.map(&:to_i).each_cons(num_slices) { |sub_arr| outcome << sub_arr }
+
     outcome
   end
 end
