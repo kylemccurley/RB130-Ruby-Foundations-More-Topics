@@ -1,26 +1,17 @@
-# Write a program that will take a string of digits and give you all the
-# possible consecutive number series of length n in that string.
-
 =begin
-  - Constructor will take the string
-  of digits.
-  - Series is a class
-  - Slices is an instance method.
-    - Input: Integer (n)
-    - Output: Nested Array
-      - Sub-arrays contain n elements
-      
 Algorithm For the Slices Method:
   Given an integer: n
-    - Initialize a local variable:outcome
-      - Set to []
-    - Iterate through each element of
-    the passed in string with index: (Array#each_with_index)
-      - Initialize a local variable: sub_array
-        - Set to []
-      - Iterate n times using (Integer#times): |offset|
-        - Append element at @series[index + offset] to sub_array
-      - Append sub_array to outcome
+  SET outcome = []
+  LOOP @slices.each_with_index do |el, idx|
+    SET sub_array = []
+    LOOP n times do |offset|
+      APPEND @series[idx + offset] to sub_array
+    END
+    APPEND sub_array to outcome
+  END
+  RETURN outcome
+  
+  Replace lines 27 to 32 with Array#each_cons(n):
 =end
 
 class Series
@@ -30,19 +21,7 @@ class Series
   
   def slices(num_slices)
     outcome = []
-
-    @string.chars.each_with_index do |char, idx|
-      sub_array = []
-
-      num_slices.times do |offset|
-        sub_array << @string.chars[idx + offset].to_i
-      end
-
-      outcome << sub_array
-    end
-    
+    @string.chars.map(&:to_i).each_cons(num_slices) { |sub_arr| outcome << sub_arr }
     outcome
   end
 end
-
-
