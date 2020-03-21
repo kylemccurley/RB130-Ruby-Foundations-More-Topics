@@ -30,19 +30,14 @@ class Anagram
   end
   
   def match(anagram_candidates)
-    anagrams = find_all_anagrams(anagram_candidates)
-    anagrams
-  end
-  
-  private
-  
-  def find_all_anagrams(candidates)
     outcome = []
     candidates.each do |candidate|
       outcome << candidate if anagram?(candidate)
     end
     outcome
   end
+  
+  private
   
   def anagram?(candidate)
     candidate.downcase.chars.sort == @control.downcase.chars.sort &&
