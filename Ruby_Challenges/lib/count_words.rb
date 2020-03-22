@@ -43,9 +43,8 @@ class Phrase
   end
   
   def word_count
-    matches = @sentence.scan(/\b[\w']+\b/)
     output = {}
-    matches.uniq.each do |word|
+    @sentence.scan(/\b[\w']+\b/).uniq.each do |word|
       output[word] = matches.count(word)
     end
     output
