@@ -19,9 +19,9 @@ class Fixnum
     number = self
     numeral = ''
     
-    ROMAN_NUMERALS.each do |key, value|
-      multiplier = number / key
-      number -= 
+    ROMAN_NUMERALS.each do |value, symbol|
+      multiplier = number / value
+      number -= value * multiplier
       numeral += symbol * multiplier
     end
         
