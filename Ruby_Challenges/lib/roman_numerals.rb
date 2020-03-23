@@ -1,4 +1,3 @@
-# Placeholder file
 ROMAN_NUMERALS = {
       1000 => "M",
       900 => "CM",
@@ -14,3 +13,18 @@ ROMAN_NUMERALS = {
       4 => "IV",
       1 => "I"
     }
+
+class Fixnum
+  def to_roman
+    number = self
+    numeral = ''
+    
+    ROMAN_NUMERALS.each do |key, value|
+      multiplier = number / key
+      number -= 
+      numeral += symbol * multiplier
+    end
+        
+    numeral
+  end
+end
