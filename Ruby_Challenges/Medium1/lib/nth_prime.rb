@@ -1,68 +1,50 @@
-=begin
-nth Prime Method:
-  Input: Integer (nth Prime Number)
-  Output: nth Prime Number
+require 'prime'
 
-  Questions:
-    > How to calculate a prime number/next prime number?
+ERROR_MESSAGE = <<-MSG.freeze
+Using Ruby's Prime class is probably the best way to do this in a
+'real' application; but this is an exercise, not a real application,
+so you're expected to implement this yourself.
+MSG
 
-  Brainstorm:
-    1. Loop 1-by-1 through each integer and calculate whether that number is prime
-      > Append true prime tested numbers into an array of primes
-
-  Problem Domain:
-    > WHAT IS A PRIME NUMBER?
-      > Number who's factors are only 1 and the number itself.
-
-    > Shortcut 1:
-      > Only test prime numbers smaller than the number you are testing
-    > Shortcut 2:
-      > Only test numbers that are below the square root of the
-        number you are testing.
-
-    > Shortcuts 1 + 2:
-      > Only test prime numbers that are below the square root
-        of the number you are testing.
-
-  Algorithm: Find the nth Prime Number
-    Given a number: nth_prime
-      > SET primes = []
-      > SET counter = 2
-      > REPEAT-UNTIL primes array is the size nth_prime
-        > APPEND counter to primes if prime?(counter) is true
-      > Return the last element of primes
-
-  prime? method:
-    Input: Integer
-    Output: Boolean Value (Is the input integer a prime number?)
-
-    Algorithm: Given an integer: number
-      > 2.REPEAT-UNTIL (i - 1): |factor|
-        > RETURN false IF number divides evenly into factor (number % factor == 0)
-      > RETURN true
-=end
+# This code prevents you from using any of the prohibited methods.
 
 class Prime
-  def self.nth(nth_prime)
-    raise ArgumentError if nth_prime.zero?
+  [:each, :new, :prime?, :take].each do |m|
+    define_method(m) { |*_| fail ERROR_MESSAGE }
+  end
+end
 
-    primes = []
-    number = 2
+class Integer
+  [:prime?, :each_prime].each do |m|
+    define_method(m) { |*_| fail ERROR_MESSAGE }
+  end
+end
 
-    while primes.size < nth_prime
-      primes << number if prime?(number)
-      number += 1
-    end
+# Actual test suite begins here.
 
-    primes.last
+require 'minitest/autorun'
+require_relative '../lib/nth_prime'
+
+class TestPrimes < Minitest::Test
+  def test_first
+    assert_equal 2, Prime.nth(1)
   end
 
-  private
+  def test_second
+    assert_equal 3, Prime.nth(2)
+  end
 
-  def self.prime?(num)
-    2.upto(num - 1) do |factor|
-      return false if num % factor == 0
+  def test_sixth_prime
+    assert_equal 13, Prime.nth(6)
+  end
+
+  def test_big_prime
+    assert_equal 104_743, Prime.nth(10_001)
+  end
+
+  def test_weird_case
+    assert_raises ArgumentError do
+      Prime.nth(0)
     end
-    true
   end
 end
